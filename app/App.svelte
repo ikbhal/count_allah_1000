@@ -1,33 +1,36 @@
 <page>
     <actionBar title="Svelte Native App" />
-    <gridLayout>
-        <label class="info" horizontalAlignment="center" verticalAlignment="middle" textWrap="true">
+    <stackLayout>
+        <label>
+            <formattedString>
+            Set Start Count
+            </formattedString>
+        </label>
+        <textField bind:text="{startCount}" on:returnPress={setStartCount}/>
+        <label class="info" textWrap="true">
             <formattedString>
                 <span class="fas" text="&#xf135;" />
                 <span text=" {message}" />
                 <span text="{count}"/>
             </formattedString>
-            <!-- <button text="Count" on:tap="{onButtonTap}" /><br/> -->
-            <!-- <div>Allah Count {count}</div> -->
-            <!-- <div>{count}</div> -->
-
-
         </label>
-
-        <button class="counter" text="+" on:tap="{onButtonTap}"
-            horizontalAlignment="center" verticalAlignment="bottom"    
-        />
-
-    </gridLayout>
+        <button class="counter" text="-" on:tap="{onButtonTap}" />
+    </stackLayout>
 </page>
 
 <script lang="typescript">
     let message: string = "Allah Count: ";
-    let count = 0;
+    let startCount = 1000;
+    let count = 1000;
 
     function onButtonTap() {
         console.log("inside onButtonTap");
-        count++;
+        if(count>0)
+            count--;
+    }
+    function setStartCount() {
+        console.log("inside setSTartCount ", startCount);
+        count = startCount;
     }
 </script>
 
